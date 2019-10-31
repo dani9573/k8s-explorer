@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: explorer-db
+  labels:
+     run: explorer-db
+spec:
+  selector:
+    matchLabels:
+      run: explorer-db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: explorer-db
+    spec:
+      containers:
+      - name: postgres-db
+        image: hyperledger/explorer-db
+        env:
+        - name: DATABASE_DATABASE
+          value: "fabricexplorer"
+        - name: DATABASE_USERNAME
+          value: "username"
+        - name: DATABASE_PASSWORD
+          value: "password"
+        ports:
+          - containerPort: 5432
+        volumeMounts:
+        - name: explorer-postgresql-data
+          mountPath: /var/lib/postgresql/data
+        - name: my-pvc-nfs
+          mountPath: /docker-entrypoint-initdb.d/createdb.sh
+          subPath: explorer/db/createdb.sh
+      volumes:
+        - name: my-pvc-nfs
+          persistentVolumeClaim:
+            claimName: nfs
+
+  volumeClaimTemplates:
+  - metadata: 
+      name: explorer-postgresql-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: general
+      resources:
+        requests:
+          storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: explorer-db
+  labels:
+    run: explorer-db
+spec:
+  selector:
+    run: explorer-db
+  ports:
+    - name: explorer-db
+      port: 5432
+    
+  type: ClusterIP 
