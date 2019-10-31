@@ -15,7 +15,7 @@ spec:
         run: explorer-app
     spec:
       containers:
-      - name: postgres-db
+      - name: explorer-app
         image: hyperledger/explorer
         command: ["sh" , "-c" , "sleep 16&& node /opt/explorer/main.js && tail -f /dev/null"]
         env:
