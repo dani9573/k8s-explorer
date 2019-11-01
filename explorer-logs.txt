@@ -1,0 +1,73 @@
+false 'ssl-certs' '/opt/explorer/ssl-certs'
+D1101 02:13:42.737858397       7 env_linux.cc:71]            Warning: insecure environment read function 'getenv' used
+D1101 02:13:43.577307240       7 env_linux.cc:71]            Warning: insecure environment read function 'getenv' used
+******* Initialization started for hyperledger fabric platform ******, { prototipo_basic:
+   { name: 'prototipo_basic',
+     profile: './connection-profile/prototipo_basic.json' } }
+ client_configs.name  prototipo_basic  client_configs.profile  ./connection-profile/prototipo_basic.json
+FabricUtils.createFabricClient
+config.client.tlsEnable  undefined
+FabricConfig, this.config.channels  prototipochannel
+2019-11-01T02:13:44.188Z - error: [FabricCAClientService.js]: Invalid enroll request, missing enrollmentID
+'Error instantiating FabricCAServices '
+2019-11-01T02:13:44.242Z - error: [Channel.js]: Error: Peer with name "peer0.org1.prototipo.com" not assigned to this channel
+2019-11-01T02:13:47.282Z - error: [Remote.js]: Error: Failed to connect before the deadline URL:grpcs://peer0-org1-prototipo-com:7051
+
+ ********* call to initializeDetachClient **********
+initializeDetachClient --> client_config  { name: 'prototipo_basic',
+  profile: './connection-profile/prototipo_basic.json' }  name  prototipo_basic
+initializeDetachClient, network config)  { name: 'prototipo_basic',
+  version: '1.0.0',
+  client: { organization: 'Org1', connection: { timeout: [Object] } },
+  channels: { prototipochannel: { orderers: [Array], peers: [Object] } },
+  organizations:
+   { Org1:
+      { mspid: 'Org1MSP',
+        fullpath: false,
+        adminPrivateKey: [Object],
+        signedCert: [Object],
+        peers: [Array],
+        certificateAuthorities: [Array] } },
+  peers:
+   { 'peer0.org1.prototipo.com':
+      { tlsCACerts: [Object],
+        url: 'grpcs://peer0-org1-prototipo-com:7051',
+        eventUrl: 'grpcs://peer0-org1-prototipo-com:7053',
+        grpcOptions: [Object] },
+     'peer1-org1-prototipo-com':
+      { tlsCACerts: [Object],
+        url: 'grpcs://peer1-org1-prototipo-com:7051',
+        eventUrl: 'grpcs://peer1-org1-prototipo-com:7053',
+        grpcOptions: [Object] } },
+  orderers:
+   { 'orderer-prototipo-com':
+      { url: 'grpcs://orderer-prototipo-com:7050',
+        grpcOptions: [Object],
+        tlsCACerts: [Object] } },
+  certificateAuthorities:
+   { caorg1:
+      { url: 'https://ca-org1-prototipo-com:7054',
+        httpOptions: [Object],
+        tlsCACerts: [Object],
+        caName: 'caorg1' } } }
+
+************************************* initializeDetachClient *************************************************
+Error : Failed to connect client peer, please check the configuration and peer status
+Info :  Explorer will continue working with only DB data
+************************************** initializeDetachClient ************************************************
+
+FabricUtils.createDetachClient
+
+
+Please open web browser to access ：http://localhost:8080/
+
+
+pid is 7
+
+
+FabricConfig, this.config.channels  prototipochannel
+<<<<<<<<<<<<<<<<<<<<<<<<<< Explorer Error >>>>>>>>>>>>>>>>>>>>>
+Error :  [ 'Default client peer is down and no channel details available database' ]
+Received kill signal, shutting down gracefully
+<<<<<<<<<<<<<<<<<<<<<<<<<< Closing explorer  >>>>>>>>>>>>>>>>>>>>>
+Closed out connections
