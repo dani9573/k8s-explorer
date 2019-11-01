@@ -5,6 +5,7 @@ metadata:
   labels:
      run: explorer-app
 spec:
+  serviceName: explorer-app
   selector:
     matchLabels:
       run: explorer-app
@@ -17,14 +18,17 @@ spec:
       containers:
       - name: explorer-app
         image: hyperledger/explorer
-        command: ["sh" , "-c" , "sleep 16&& node /opt/explorer/main.js && tail -f /dev/null"]
+        command: ["sh"]
+        args: ["-c", "sleep 16 && node /opt/explorer/main.js && tail -f /dev/null"]
         env:
         - name: DATABASE_HOST
           value: explorer-db
         - name: DATABASE_USERNAME
           value: "username"
-        - name: DATABASE_PASSWORD
+        - name: DATABASE_PASSWD
           value: "password"
+        - name: DISCOVERY_AS_LOCALHOST
+          value: "false"
 
         volumeMounts:
         - name: my-pvc-nfs
@@ -34,11 +38,11 @@ spec:
           mountPath: /opt/explorer/app/platform/fabric/connection-profile
           subPath: explorer/connection-profile
         - name: my-pvc-nfs
-          mountPath: /tmp/crypto
+          mountPath: /crypto
           subPath: crypto-config
 #        - name: my-pvc-nfs
 #          mountPath: /opt/wallet
-#          subPath: explorer/walletstore
+#          subPath: production/explorer/walletstore
 
       volumes:
         - name: my-pvc-nfs

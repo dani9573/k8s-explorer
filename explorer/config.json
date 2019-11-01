@@ -1,0 +1,9 @@
+{
+	"network-configs": {
+		"prototipo_basic": {
+			"name": "prototipo_basic",
+			"profile": "./connection-profile/prototipo_basic.json"
+		}
+	},
+	"license": "Apache-2.0"
+}

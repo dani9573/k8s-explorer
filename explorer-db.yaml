@@ -5,6 +5,7 @@ metadata:
   labels:
      run: explorer-db
 spec:
+  serviceName: explorer-db
   selector:
     matchLabels:
       run: explorer-db
@@ -27,8 +28,9 @@ spec:
         ports:
           - containerPort: 5432
         volumeMounts:
-        - name: explorer-postgresql-data
-          mountPath: /var/lib/postgresql/data
+   #     - name: my-pvc-nfs
+   #       mountPath: /var/lib/postgresql/data
+   #       subPath: production/explorer/db 
         - name: my-pvc-nfs
           mountPath: /docker-entrypoint-initdb.d/createdb.sh
           subPath: explorer/db/createdb.sh
@@ -36,16 +38,7 @@ spec:
         - name: my-pvc-nfs
           persistentVolumeClaim:
             claimName: nfs
-
-  volumeClaimTemplates:
-  - metadata: 
-      name: explorer-postgresql-data
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      storageClassName: general
-      resources:
-        requests:
-          storage: 1Gi
+            
 ---
 apiVersion: v1
 kind: Service

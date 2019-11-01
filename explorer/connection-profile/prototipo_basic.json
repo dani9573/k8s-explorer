@@ -1,0 +1,88 @@
+{
+    "name": "prototipo_basic",
+    "version": "1.0.0",
+    "client": {
+        "organization": "Org1",
+        "connection": {
+            "timeout": {
+                "peer": {
+                    "endorser": "300"
+                },
+                "orderer": "300"
+            }
+        }
+    },
+    "channels": {
+        "prototipochannel": {
+            "orderers": [
+                "orderer-prototipo-com"
+            ],
+            "peers": {
+                "peer0-org1.prototipo-com": {}
+            }
+        }
+    },
+    "organizations": {
+        "Org1": {
+            "mspid": "Org1MSP",
+	    "fullpath": false,
+            "adminPrivateKey": {
+              "path": "/crypto/peerOrganizations/org1-prototipo-com/users/Admin@org1-prototipo-com/msp/keystore/26914c1fe28dc1cf22f6e15d4bdc546acf9f83e33830828febf8e428b6e7f05f_sk"
+         },
+            "signedCert":{
+              "path": "/crypto/peerOrganizations/org1-prototipo-com/users/Admin@org1-prototipo-com/msp/signcerts/Admin@org1-prototipo-com-cert.pem"
+		},
+            "peers": [
+                "peer0-org1-prototipo-com","peer1-org1-prototipo-com"
+            ],
+            "certificateAuthorities": [
+                "caorg1"
+            ]
+        }
+    },
+    "peers": {
+          "peer0.org1.prototipo.com": {
+            "tlsCACerts": {
+              "path": "/crypto/peerOrganizations/org1-prototipo-com/peers/peer0-org1-prototipo-com/tls/ca.crt"
+            },
+            "url": "grpcs://peer0-org1-prototipo-com:7051",
+            "eventUrl": "grpcs://peer0-org1-prototipo-com:7053",
+            "grpcOptions": {
+              "ssl-target-name-override": "peer0-org1-prototipo-com"
+            }
+          },
+          "peer1-org1-prototipo-com": {
+            "tlsCACerts": {
+              "path": "/crypto/peerOrganizations/org1-prototipo-com/peers/peer1-org1-prototipo-com/tls/ca.crt"
+            },
+            "url": "grpcs://peer1-org1-prototipo-com:7051",
+            "eventUrl": "grpcs://peer1-org1-prototipo-com:7053",
+            "grpcOptions": {
+              "ssl-target-name-override": "peer1-org1-prototipo-com"
+            }
+          }
+    },
+        "orderers": {
+          "orderer-prototipo-com": {
+            "url": "grpcs://orderer-prototipo-com:7050",
+            "grpcOptions": {
+              "ssl-target-name-override": "orderer-prototipo-com"
+            },
+            "tlsCACerts": {
+              "path": "/crypto/ordererOrganizations/prototipo-com/orderers/orderer-prototipo-com/tls/ca.crt"
+            }
+          }
+        },
+    "certificateAuthorities": {
+          "caorg1": {
+            "url": "https://ca-org1-prototipo-com:7054",
+            "httpOptions": {
+              "verify": false
+            },
+            "tlsCACerts": {
+              "path": "/crypto/peerOrganizations/org1-prototipo-com/ca/ca.org1-prototipo-com-cert.pem"
+            },
+            "caName": "caorg1"
+          }
+        }
+}
